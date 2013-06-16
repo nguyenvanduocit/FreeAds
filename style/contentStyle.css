@@ -1,0 +1,22 @@
+.ce-menuwrapper {
+	position: fixed;
+	top: 0;
+	left:100%;
+	width: 100%;
+	height: 100%;
+	padding: 0;
+	margin: 0;
+	z-index: 999999999;
+	background-color: #fcfcfc;
+	overflow: hidden;
+	-webkit-perspective: 1000px;
+	-moz-perspective: 1000px;
+	perspective: 1000px;
+	-webkit-perspective-origin: 50% 200%;
+	-moz-perspective-origin: 50% 200%;
+	perspective-origin: 50% 200%;
+}
+#ce-iframe{
+	width: 100% !important;
+	height: 100% !important;
+}
