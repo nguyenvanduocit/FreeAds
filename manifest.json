@@ -1,12 +1,13 @@
 {
    "background": {
-      "scripts": ["javascript/blockAds.js","javascript/analytics.js"]
+      "scripts": ["javascript/analytics.js","javascript/blockAds.js"]
    },
    "content_scripts": [
     {
       "matches": ["http://*/*","https://*/*"],
-      "js": ["javascript/jquery-1.7.2.min.js","javascript/contentScript.js"],
-      "run_at" : "document_start"//,"exclude_matches":["https://www.google.com.vn/webhp"]
+      "js": ["javascript/contentScript.js"],
+      "css":["style/contentStyle.css"],
+      "run_at" : "document_start"
     }
   ],
    "browser_action": {
@@ -25,7 +26,7 @@
    "manifest_version": 2,
    "name": "__MSG_extName__",
    "options_page": "options.html",
-   "permissions": [ "tabs", "webNavigation", "webRequest", "webRequestBlocking", "management","notifications","storage","http://*/*", "https://*/*"],
+   "permissions": [ "tabs", "webNavigation", "webRequest", "webRequestBlocking", "management","notifications","storage","topSites","http://*/*", "https://*/*"],
    "content_security_policy": "script-src 'self' https://*.google-analytics.com; object-src 'self'",
    "version": "1.0.1",
    "web_accessible_resources": ["style/contentStyle.css"]

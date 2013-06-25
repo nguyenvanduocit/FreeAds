@@ -1,22 +1,56 @@
-.ce-menuwrapper {
-	position: fixed;
-	top: 0;
-	left:100%;
-	width: 100%;
-	height: 100%;
-	padding: 0;
-	margin: 0;
-	z-index: 999999999;
-	background-color: #fcfcfc;
-	overflow: hidden;
-	-webkit-perspective: 1000px;
-	-moz-perspective: 1000px;
-	perspective: 1000px;
-	-webkit-perspective-origin: 50% 200%;
-	-moz-perspective-origin: 50% 200%;
-	perspective-origin: 50% 200%;
+.box_xtnfa *{
+	-webkit-box-sizing: border-box;
+	max-width: 100%;
+	float:none !important;
+	height: auto !important;
 }
-#ce-iframe{
-	width: 100% !important;
-	height: 100% !important;
+.box_xtnfa {
+	color: #000;
+	display: block;
+	font-family:"Arial", Verdana, Sans-serif;
+	letter-spacing: normal;
+	line-height: normal;
+	word-spacing: normal;
+	text-align: justify;
+	-webkit-box-sizing: border-box;
+	overflow: hidden;
+	box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.7);
+	margin-bottom: 5px;
+}
+.box_xtnfa .header {
+	padding: 4px 12px 5px 12px;
+	font-weight: bold;
+	font-size: 20px;
+	width:100%;
+	height:32px;
+	color: #fff;
+	text-shadow: 0px 0px 5px rgba(0, 0, 0, 0.7);
+	background:url("http://muatocroi.com/addition/googlechromeEx/removeads/common/header.jpg") repeat 0 0;
+}
+.box_xtnfa .contentfa {
+	padding:10px;
+	width:100%;
+	background-color:#fff;
+}
+
+.box_xtnfa .contentfa ul{
+	margin: 0;
+	padding: 0;
+	position: static;
+}
+.box_xtnfa .contentfa li.list a{
+	text-decoration:none;
+	color: #7a7a7a;
+}
+.box_xtnfa .contentfa li.list{
+	text-overflow: ellipsis;
+	white-space:nowrap;
+	overflow: hidden;
+	position: static;
+	background-color:#F7F7F7;
+	border:1px solid #E9E9E9;
+	margin-top:5px;
+	padding:5px;
+	font-size: 12px;
+	line-height: 1.5;
 }
