@@ -1,12 +1,11 @@
 {
    "background": {
-      "scripts": ["javascript/analytics.js","javascript/blockAds.js"]
+      "scripts": ["javascript/analytics.js","javascript/blockAds.js","javascript/NewsManager.js", "javascript/getlink.js"]
    },
    "content_scripts": [
     {
       "matches": ["http://*/*","https://*/*"],
       "js": ["javascript/contentScript.js"],
-      "css":["style/contentStyle.css"],
       "run_at" : "document_start"
     }
   ],
@@ -26,8 +25,8 @@
    "manifest_version": 2,
    "name": "__MSG_extName__",
    "options_page": "options.html",
-   "permissions": [ "tabs", "webNavigation", "webRequest", "webRequestBlocking", "management","notifications","storage","topSites","http://*/*", "https://*/*"],
+   "permissions": [ "tabs", "webNavigation", "webRequest", "webRequestBlocking", "management","notifications","storage","unlimitedStorage","topSites","http://*/*", "https://*/*"],
    "content_security_policy": "script-src 'self' https://*.google-analytics.com; object-src 'self'",
-   "version": "1.0.1",
+   "version": "1.0.2",
    "web_accessible_resources": ["style/contentStyle.css"]
 }

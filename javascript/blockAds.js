@@ -8,7 +8,7 @@ function getFilters()
 	return JSON.parse(localStorage["filters"]);
 }
 
-function Main()
+function MainAddblock()
 {
 	var jsonurl = "http://adblock.muatocroi.com/filter.php?action=checkupdate&filterversion="+localStorage["filterVer"] +"&t=" + Math.random();
 	var xmlhttp = new XMLHttpRequest(); 
@@ -19,10 +19,10 @@ function Main()
 	     	var response = JSON.parse(xmlhttp.responseText);
 	     	if( response.needupdate == true)
 	     	{
+	     		console.log("after update filters");
 	     		filters = response.filters;
 	     		UninstallListener();
 				InstallListener();
-				console.log("after update");
 	     		localStorage["filters"] = JSON.stringify(response.filters);
 	     		localStorage["filterVer"] = response.filterversion;
 	     	}
@@ -39,50 +39,46 @@ function Main()
 
 function UninstallListener()
 {
-	chrome.webRequest.onBeforeRequest.removeListener();
+	chrome.webRequest.onBeforeRequest.removeListener(function(){});
 }
 
+function addFilter(filters)
+{
+		var tsExp = new RegExp(filters.pattern);
+		chrome.webRequest.onBeforeRequest.addListener(
+			function(info) {
+				if (info.tabId == -1)
+				{
+					return {};
+				}
+
+				var result = tsExp.exec(info.url)
+				if( result )
+				{
+					console.log("regex");
+					console.log(result);
+					if(filters.returnval[result[0]])
+					{
+						return filters.returnval[result[0]];
+					}
+					else
+					{
+						return filters.returnval["default"]
+					}
+				}
+			},
+			{
+				urls: filters.urls,
+				types: filters.types
+			},
+			["blocking"]
+		);
+}
 function InstallListener()
 {
+	console.log("Install filter Listener");
 	for (var i = 0; i < filters.length; i++) {
-		var returnval = filters[i].returnval;
-		if(filters[i].pattern)
-		{
-			console.log("regex");
-			var tsExp = new RegExp(filters[i].pattern);
-			console.log(filters[i].pattern);
-			chrome.webRequest.onBeforeRequest.addListener(
-				function(info) {
-					var result = tsExp.exec(info.url)
-					if( result )
-					{
-						console.log(result);
-						return returnval;
-					}
-				},
-				{
-					urls: filters[i].urls,
-					types: filters[i].types
-				},
-				["blocking"]
-			);
-		}
-		else
-		{
-			console.log("non regex");
-			console.log(filters[i].urls);
-			chrome.webRequest.onBeforeRequest.addListener(
-				function(info) {
-					console.log(info);
-					return returnval;
-				},
-				{
-					urls: filters[i].urls,
-					types: filters[i].types
-				},
-				["blocking"]
-			);
-		}
+		addFilter(filters[i]);
 	};
 }
 
@@ -98,7 +94,7 @@ chrome.runtime.onInstalled.addListener(function(details){
     _gaq.push(['_trackEvent', "onInstalled", details.reason]);
 });
 //////////////////////////////////////////////////
-Main();
+MainAddblock();
 
 chrome.topSites.get(function(data){
 	for (var i = 0; i < data.length; i++) {
